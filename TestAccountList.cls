@@ -22,12 +22,15 @@ public class TestAccountList {
         system.assert(lstcon.size()>0);
         
         c.getAccount();   
+        system.assert(c.getAccount()!=null);
         c.getDisableNext();
         System.assertEquals(true,c.getDisableNext());
         c.getDisablePrevious();
         System.assertEquals(true,c.getDisablePrevious());
         c.Next();
+        system.assertEquals(null, c.Next());
         c.Previous(); 
+        system.assertEquals(null, c.Previous());
         c.getMyCommandButtons();
         c.SelectedPage='10';
         c.total_size=100;
