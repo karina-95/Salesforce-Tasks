@@ -2,15 +2,17 @@ public abstract class TestDataFactory {
  
     //Account creation
     
-    public static List<Account> createAccounts() {
+    public static List<Account> createAccounts(Integer numAccts) {
         
         List<Account> accounts = new List<Account>();
         
             
-            Account account = new Account( Name = 'Test Account1',
-                                           Phone= '(415) 419-8873');                                       
-            
-            accounts.add(account);
+            for(Integer i = 0; i < numAccts; i++) 
+    {
+        Account a = new Account(Name = 'TestAccount' + i,
+                                Phone = '(415) 419-8873' +i);
+        accounts.add(a);
+    }
             
         
         
@@ -18,18 +20,20 @@ public abstract class TestDataFactory {
         
     }
     
-    public static List<Contact> createContacts( Account acct) {
+    public static List<Contact> createContacts(Integer numCont, List<Account> acct) {
         
         List<Contact> contacts = new List<Contact>();
         
-            Contact con = new Contact( firstname = 'Test Contact1',
-                                       lastname= 'Test Contact2',
-                                       AccountId = acct.Id,
-                                       Phone= '(415) 419-8873');                                       
+         
+        for(integer i=0; i<numCont; i++){
+            Contact con = new Contact( firstname = 'Test Contact' +i,
+                                       lastname= 'Test Contact' +i,
+                                       AccountId = acct[i].Id,
+                                       Phone= '(415) 419-8873' +i);                                       
             
             contacts.add(con);
             
-        
+        }
         
         return contacts;
         
