@@ -28,9 +28,9 @@ public class TestAccountList {
         c.getDisablePrevious();
         System.assertEquals(true,c.getDisablePrevious());
         c.Next();
-        system.assertEquals(null, c.Next());
+        system.assertEquals(20,c.counter);
         c.Previous(); 
-        system.assertEquals(null, c.Previous());
+        system.assertEquals(0,c.counter);
         c.getMyCommandButtons();
         c.SelectedPage='10';
         c.total_size=100;
