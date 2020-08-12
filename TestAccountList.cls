@@ -1,39 +1,43 @@
 @isTest
 public class TestAccountList {
     
-    
     @IsTest
     public static void testAccountList() {
         PaginationNumberController c = new PaginationNumberController(); 
-        Account acct=new Account();
-        Contact con=new Contact();
-        acct = TestDataFactory.createAccounts()[0];
+        List<Account> lstacct = TestDataFactory.createAccounts(100);
+        insert lstacct;
+        List<Account> accts = [select Name, Phone from Account where id IN:lstacct];
+        for(Account acct: accts){
+            System.assert(acct.Id!=null);
+        }
+        system.assert(lstacct.size()>0);
         
-        insert acct;
-        con = TestDataFactory.createContacts(acct)[0];
+        List<Contact> lstcon = TestDataFactory.createContacts(100,lstacct);
         
-        insert con;
+        insert lstcon;
+        List<Contact> conts = [select Name, Email from Contact where id IN:lstcon];
+        for(Contact con: conts){
+            System.assert(con.Id!=null);
+        }
+        system.assert(lstcon.size()>0);
         
-        
-        system.debug('Account Id'+acct.id);
-        
-        acct = [select Name, Phone from Account where id = :acct.id];
-        
-        system.assertEquals(acct.name, 'Test Account1');
-        
-        c.getAccount();    
+        c.getAccount();   
         c.getDisableNext();
+        System.assertEquals(true,c.getDisableNext());
         c.getDisablePrevious();
-        c.getTotal_size();
+        System.assertEquals(true,c.getDisablePrevious());
         c.Next();
-        c.Previous();  
+        c.Previous(); 
         c.getMyCommandButtons();
         c.SelectedPage='10';
-        c.total_size=50;
+        c.total_size=100;
         c.refreshGrid();        
         c.getMyCommandButtons(); 
+        c.getTotal_size();
+        system.assertEquals(100, c.getTotal_size());
         c.getPageNumber();
-        c.getTotalPages();   
+        c.getTotalPages(); 
+        System.assertEquals(5, c.getTotalPages());
         c.ContactLists();
     }    
     
