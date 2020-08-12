@@ -3,14 +3,7 @@ public class PaginationNumberController {
     private integer counter=0;  
     private integer list_size=20; 
     public integer total_size; 
-    String paramValue;
-    public String getParamValue(){
-        return paramValue;
-    }
     
-    public void setParamValue(String paramValue){
-        this.paramValue = paramValue;
-    }
 
     public string selectedPage{get; set;}
     public List<Contact> conList {get;set;}
