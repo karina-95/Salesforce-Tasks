@@ -1,7 +1,7 @@
 public class PaginationNumberController {
     
-    private integer counter=0;  
-    private integer list_size=20; 
+    public integer counter=0;  
+    public integer list_size=20; 
     public integer total_size; 
     
 
