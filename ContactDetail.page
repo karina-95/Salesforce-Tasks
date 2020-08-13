@@ -1,0 +1,43 @@
+<apex:page standardController="Contact" renderAs="pdf"  >
+   
+		    <body>
+        
+            <h3 style="text-align:center;">Your Contact Details are here!</h3>
+
+        
+            <table border="1" style=" width:70%; "  >
+                
+                <tr style="height:50px;" ><th>Contact Name:</th>
+                    <td style= "font-size: 100%;"  ><apex:outputText value="{!Contact.Name}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Account Name:</th>
+                    <td style= "font-size: 100%;" ><apex:outputText value="{!Contact.Account.Name}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Phone:</th>
+                    <td style="font-size: 100%;" ><apex:outputText value="{!Contact.Phone}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Email:</th>
+                    <td style="font-size: 100%;" ><apex:outputText value="{!Contact.Email}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Fax:</th>
+                    <td style="font-size: 100%;" ><apex:outputText value="{!Contact.Fax}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Department:</th>
+                    <td style="font-size: 100%;" ><apex:outputText value="{!Contact.Department}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>HomePhone:</th>
+                    <td style="font-size: 100%;"><apex:outputText value="{!Contact.HomePhone}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Birthdate:</th>
+                    <td style="font-size: 100%;" ><apex:outputText value="{!Contact.Birthdate}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Level:</th>
+                    <td style="font-size: 100%;" ><apex:outputText value="{!Contact.Level__c}"/></td>
+                </tr>
+                <tr style="height:50px;"><th>Lead Address:</th>
+                    <td style="font-size: 100%;" ><apex:outputText value="{!Contact.LeadSource}"/></td>
+                </tr>
+            </table>
+            </body>
+    
+</apex:page>
