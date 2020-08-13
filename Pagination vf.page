@@ -35,10 +35,14 @@
                 </apex:outputPanel>
                 
                 
-                <apex:outputPanel id="contactDetail" >
+                <apex:outputPanel id="contactDetail"  >
                     
                     <apex:pageBlockTable value="{!conList}" var="con" id="conList" title="Contact"  >
-                        <apex:column value="{!con.Name}" headerValue="Contact Name"/>
+                        <apex:column headerValue="Contact Name">
+                            <apex:commandLink action="{!Redirect}" value="{!con.Name}" >
+                            <apex:param name="id" value="{!con.id}"/>
+                            </apex:commandLink>
+                        </apex:column>
                         <apex:Column value="{!con.Phone}" headerValue="Phone"/>
                         <apex:Column value="{!con.Email}" headerValue="Email" />
                     </apex:pageBlockTable>
