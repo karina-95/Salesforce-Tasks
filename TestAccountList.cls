@@ -20,7 +20,8 @@ public class TestAccountList {
             System.assert(con.Id!=null);
         }
         system.assert(lstcon.size()>0);
-        
+        String conId=ApexPages.currentPage().getParameters().get('id');
+
         c.getAccount();   
         system.assert(c.getAccount()!=null);
         c.getDisableNext();
@@ -42,6 +43,8 @@ public class TestAccountList {
         c.getTotalPages(); 
         System.assertEquals(5, c.getTotalPages());
         c.ContactLists();
+        c.Redirect();
+        System.assertEquals('/apex/ContactDetail?id='+conId,c.Redirect().geturl());
     }    
     
     
