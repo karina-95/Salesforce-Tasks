@@ -58,7 +58,6 @@ public class PaginationNumberController {
         Component.Apex.outputPanel opPanel = new Component.Apex.outputPanel();
         opPanel.id = 'myButtons';
         
-        //the Previous button will always be displayed
         Component.Apex.commandButton b1 = new Component.Apex.commandButton();
         b1.expressions.action = '{!Previous}';
         b1.title = 'Previous';
@@ -106,7 +105,6 @@ public class PaginationNumberController {
             
         }
         
-        //the Next button will always be displayed
         Component.Apex.commandButton b2 = new Component.Apex.commandButton();
         b2.expressions.action = '{!Next}';
         b2.title = 'Next';
@@ -181,6 +179,16 @@ public class PaginationNumberController {
         return null;
         
     } 
+    
+     public PageReference Redirect(){
+
+         String conId=ApexPages.currentPage().getParameters().get('id');
+         system.debug('contactid'+conId);
+            PageReference pg=new PageReference('/apex/ContactDetail?id='+conId);
+         	pg.setRedirect(true);
+         
+        return pg;
+    }
     
   
 }
