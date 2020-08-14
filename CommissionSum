@@ -1,0 +1,51 @@
+trigger CommissionSum on Contact (after insert, after delete, after update) {
+    
+    List<Contact> cons=new List<Contact>();
+    if (Trigger.isDelete)
+        cons = Trigger.old;
+    else
+        cons = Trigger.new;
+    
+    Set<ID> acctIds = new Set<ID>();
+    for (Contact con : cons) {
+        acctIds.add(con.AccountId);
+    }
+    
+    Map<ID, Contact> contactsForAccounts = new Map<ID, Contact>([select Id
+                                                                 ,AccountId
+                                                                 ,Commission__c
+                                                                 from Contact
+                                                                 where AccountId in :acctIds]);
+    
+    Map<ID, Account> acctsToUpdate = new Map<ID, Account>([select Id
+                                                           ,RollUp_Of_Commission__c
+                                                           from Account
+                                                           where Id in :acctIds]);
+    
+    for (Account acct : acctsToUpdate.values()) {
+        Set<ID> conIds = new Set<ID>();
+        acct.RollUp_Of_Commission__c=0;
+        for (Contact con : contactsForAccounts.values()) {
+            if (con.AccountId == acct.Id)
+                conIds.add(con.Id);
+            
+            acct.RollUp_Of_Commission__c+=con.Commission__c;
+            
+            
+        }
+        
+    }
+    
+    update acctsToUpdate.values();
+    List<Contact> cont= [SELECT Id, Account.RollUp_Of_Commission__c, Account.Commission_Budget__c, Account.Remaining_Commission_Currency__c FROM Contact where Id IN :trigger.new];
+    for(Contact con: cont){
+
+        if(con.Account.RollUp_Of_Commission__c > 100){
+            system.debug(con.Account.RollUp_Of_Commission__c);
+            trigger.newMap.get(con.Id).addError('Commission limit exceeded');
+        }
+       
+    }
+    
+    
+}
