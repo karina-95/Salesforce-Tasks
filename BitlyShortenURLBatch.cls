@@ -3,7 +3,7 @@ global class BitlyShortenURLBatch implements Database.Batchable<sObject>, Databa
     
     global Database.QueryLocator start(Database.BatchableContext BC) {
         
-        return Database.getQueryLocator([SELECT id, Shortened_URL__c, URL__c FROM Account]);
+        return Database.getQueryLocator([SELECT id, Shortened_URL__c, URL__c FROM Account where id=:'0012w00000J6pi6']);
     }
     
     global void execute(Database.BatchableContext BC, List<Account> accList) {
